@@ -35,12 +35,24 @@
                                                 <h2 class="card-title">
                                                     <%= campground.title %>
                                                 </h2>
+                                                <p class="starability-result"
+                                                    data-rating="<%= campground.averageRating %>">
+                                                    Rated: <%= campground.averageRating %>
+                                                </p>
+                                                <p class="card-text">
+                                                    <%= campground.reviewCount %> reviews
+                                                </p>
                                                 <p class="card-text">
                                                     <%= campground.description %>
                                                 </p>
                                                 <p class="card-text">
                                                     <small class="text-muted">
                                                         <%= campground.location %>
+                                                    </small>
+                                                    <small class="text-muted">
+                                                        / Updated <%= new
+                                                            Date(campground.updatedAt).toLocaleDateString('en-US', {
+                                                            year: 'numeric' , month: 'short' , day: 'numeric' }) %>
                                                     </small>
                                                 </p>
                                                 <a href="/campgrounds/<%= campground._id %>"
