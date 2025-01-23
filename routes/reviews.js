@@ -4,7 +4,7 @@ const router = express.Router({ mergeParams: true });
 const reviews = require('../controllers/reviews');
 
 require('express-async-errors');
-const { isLoggedIn, validateReview, isReviewAuthor } = require('../middleware');
+const { isLoggedIn, validateReview, isReviewAuthor } = require('../middlewares');
 
 router.route('/')
     .post(
