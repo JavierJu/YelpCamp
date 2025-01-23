@@ -4,9 +4,36 @@ const { cloudinary } = require('../cloudinary');
 const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
 const geocodingClient = mbxGeocoding({ accessToken: process.env.MAPBOX_ACCESS_TOKEN });
 
+// module.exports.index = async (req, res) => {
+//     const campgrounds = await Campground.find({});
+//     res.render('campgrounds/index', { campgrounds });
+// }
+
 module.exports.index = async (req, res) => {
-    const campgrounds = await Campground.find({});
-    res.render('campgrounds/index', { campgrounds });
+    const { search } = req.query; // location, maxDistance
+
+    let query = {};
+    let isSearching = false;
+
+    // 텍스트 검색
+    if (search) {
+        query.$text = { $search: search };
+        isSearching = true;
+    }
+
+    // 위치 검색
+    // if (location) {
+    //     const coordinates = location.split(',').map(Number); // "lng,lat"
+    //     query.geometry = {
+    //         $geoWithin: {
+    //             $centerSphere: [coordinates, maxDistance / 6378.1] // 거리(킬로미터)를 구의 반지름으로 변환
+    //         }
+    //     };
+    // isSearching = true;
+    // }
+
+    const campgrounds = await Campground.find(query);
+    res.render('campgrounds/index', { campgrounds, isSearching });
 }
 
 module.exports.renderNewForm = (req, res) => {
