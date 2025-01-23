@@ -8,7 +8,7 @@ const UserSchema = new Schema({
         required: true,
         unique: true
     }
-});
+}, { timestamps: true }); // timestamps 옵션 추가
 
 UserSchema.plugin(passportLocalMongoose);
 
