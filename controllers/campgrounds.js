@@ -32,7 +32,7 @@ module.exports.index = async (req, res) => {
     // isSearching = true;
     // }
 
-    const campgrounds = await Campground.find(query);
+    const campgrounds = await Campground.find(query).populate('reviews');
     res.render('campgrounds/index', { campgrounds, isSearching });
 }
 
@@ -58,6 +58,7 @@ module.exports.createCampground = async (req, res) => {
 module.exports.showCampground = async (req, res) => {
     const campground = await Campground.findById(req.params.id).populate({
         path: 'reviews',
+        options: { sort: { createdAt: -1 } }, // 최신 순으로 정렬
         populate: {
             path: 'author'
         }
