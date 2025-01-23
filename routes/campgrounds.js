@@ -4,7 +4,7 @@ const router = express.Router();
 const campgrounds = require('../controllers/campgrounds');
 
 require('express-async-errors');
-const { isLoggedIn, validateCampground, isAuthor } = require('../middleware');
+const { isLoggedIn, validateCampground, isAuthor } = require('../middlewares');
 
 const multer = require('multer');
 const { storage } = require('../cloudinary');
