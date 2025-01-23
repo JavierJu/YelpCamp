@@ -47,4 +47,6 @@ CampgroundSchema.post('findOneAndDelete', async function (doc) {
     }
 })
 
+CampgroundSchema.index({ title: "text", description: "text", location: "text" });
+
 module.exports = mongoose.model('Campground', CampgroundSchema);
