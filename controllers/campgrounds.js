@@ -32,7 +32,7 @@ module.exports.index = async (req, res) => {
     // isSearching = true;
     // }
 
-    const campgrounds = await Campground.find(query).populate('reviews');
+    const campgrounds = await Campground.find(query).populate('reviews').sort({ createdAt: -1 }); // ✅ 최신순 정렬
     res.render('campgrounds/index', { campgrounds, isSearching });
 }
 
