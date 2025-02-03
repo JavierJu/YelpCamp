@@ -26,7 +26,8 @@ const setupHelmet = () => {
         "https://events.mapbox.com/",
     ];
     const fontSrcUrls = [
-        "https://cdnjs.cloudflare.com", // 추가된 CDN 도메인
+        "https://cdnjs.cloudflare.com",  // Font Awesome 폰트 허용
+        "https://fonts.gstatic.com",    // Google Fonts 허용
     ];
 
     return helmet.contentSecurityPolicy({
@@ -44,7 +45,7 @@ const setupHelmet = () => {
                 "https://res.cloudinary.com/", // Replace with your Cloudinary
                 "https://images.unsplash.com/",
             ],
-            fontSrc: ["'self'", "https://fonts.gstatic.com"],
+            fontSrc: ["'self'", ...fontSrcUrls], // 폰트 출처 추가됨
         },
     });
 };
