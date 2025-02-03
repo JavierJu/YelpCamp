@@ -13,7 +13,7 @@ router.route('/')
         reviews.createReview
     );
 
-router.route('/')
+router.route('/:reviewId')
     .delete(
         isLoggedIn,
         isReviewAuthor,
