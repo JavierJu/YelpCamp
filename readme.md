@@ -1,3 +1,46 @@
+## Yelp Camp V1.1.0
+
+### 1. 코드 리팩토링
+#### 1) `app.js` 코드 분리
+- `helmet` 및 `session` 관련 로직을 `middlewares/helmet.js`, `middlewares/session.js`로 분리
+- 데이터베이스 연결(`db connection`)을 `config/db.js`로 분리
+- 기존 `middlewares/middleware.js` 내용을 기능별로 분리하고, `middlewares/index.js`에서 통합
+  - 인증 관련 (`isLoggedIn`, `storeReturnTo`) → `middlewares/auth.js`
+  - 데이터 검증 관련 (`validateCampground`, `validateReview`) → `middlewares/validators.js`
+  - 권한 확인 관련 (`isAuthor`, `isReviewAuthor`) → `middlewares/permissions.js`
+- 홈 페이지 라우트(`/`)를 `routes/home.js` 및 `controllers/home.js`로 분리
+
+### 2. 사용자 경험 개선
+#### 1) 회원가입 후 자동 로그인 및 리디렉션 개선
+- `/register`에서 회원가입 후 자동으로 `/login`을 호출
+- 로그인 후 `campgrounds` 페이지로 이동하도록 수정
+- 기존 사용자가 요청한 URL로 리디렉션하는 기능에서 `/register` 경로 제외
+
+#### 2) 홈 페이지 개선
+- 스타일 개편
+- 불필요한 `home`, `campgrounds` 버튼 삭제
+
+### 3. 기능 추가
+#### 1) 파비콘(Favicon) 추가
+- `/public/favicon` 폴더에 아이콘 추가
+- `/views/partials/favicon.ejs` 생성 후 `home.ejs` 및 `boilerplate.ejs`에 포함
+
+#### 2) 기본 이미지 설정
+- 캠프장 목록(`campgrounds/index.ejs`) 및 상세 페이지(`campgrounds/show.ejs`)에서 이미지가 없을 경우 기본 이미지(`/public/images/default-image.jpg`) 표시
+
+#### 3) 검색 기능 추가
+- MongoDB의 `$text` 인덱스를 사용하여 캠프장 `title` 및 `description`을 기준으로 검색 가능하도록 구현
+
+#### 4) 작성 및 수정 날짜 추가
+- 캠프장 및 리뷰 작성/업데이트 일자를 표시
+
+#### 5) 리뷰 시스템 개선
+- 캠프장 상세 페이지에서 총 리뷰 수 및 평균 평점 표시
+- 최신 리뷰가 가장 위에 나타나도록 정렬
+- 리뷰 작성자의 이름 앞에 사용자 아이콘 추가
+- 홈 캠프장 목록에서 캠프 아이콘 추가
+
+
 ## Yelp Camp v1.0.0
 
 Yelp Camp는 사용자가 캠프장을 추가, 조회, 수정, 삭제할 수 있는 웹 애플리케이션입니다. 이 프로젝트는 MERN 스택(MongoDB, Express.js, React, Node.js)을 사용해 개발되었으며, Udemy 웹 개발 부트캠프의 학습 내용을 기반으로 만들어졌습니다.
