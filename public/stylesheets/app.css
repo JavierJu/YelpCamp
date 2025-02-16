@@ -8,7 +8,52 @@
     height: 200px;
 }
 
+/* 팝업 전체 스타일 */
 .mapboxgl-popup-content {
-    text-align: center;
-    
+    background: rgba(255, 255, 255, 0.95);  /* 반투명한 화이트 배경 */
+    border-radius: 12px;  /* 모서리를 둥글게 */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);  /* 그림자 추가 */
+    padding: 15px;
+    max-width: 350px;  /* 팝업 최대 너비 */
+    font-family: 'Arial', sans-serif;
+    color: #333;  /* 글자 색상 */
+}
+
+/* 팝업 제목 스타일 */
+.mapboxgl-popup-content h6 {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0 0 8px;
+}
+
+/* 제목 링크 스타일 */
+.mapboxgl-popup-content h6 a {
+    text-decoration: none;
+    color: #0078A8;  /* 모던한 블루 색상 */
+    transition: color 0.2s ease-in-out;
+}
+
+.mapboxgl-popup-content h6 a:hover {
+    color: #005D85;  /* 호버 시 더 진한 블루 */
+}
+
+/* 설명 스타일 */
+.mapboxgl-popup-content p {
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 0 0 10px;
+}
+
+/* 이미지 스타일 */
+.mapboxgl-popup-content img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;  /* 이미지도 둥글게 */
+    object-fit: cover;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);  /* 가벼운 그림자 추가 */
+}
+
+/* 팝업 화살표 스타일 */
+.mapboxgl-popup-tip {
+    border-top-color: rgba(255, 255, 255, 0.95) !important;
 }
