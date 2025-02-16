@@ -22,6 +22,7 @@ const CampgroundGeojsonData = {
 // console.log(JSON.stringify(CampgroundGeojsonData, null, 2));
 
 mapboxgl.accessToken = mapToken;
+
 const map = new mapboxgl.Map({
     container: 'cluster-map',
     // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
@@ -165,11 +166,11 @@ map.on('load', () => {
             }
         }
 
-        new mapboxgl.Popup()
+        new mapboxgl.Popup({ offset: 25, closeButton: true })
             .setLngLat(coordinates)
             .setHTML(
                 `<h6><a href="/campgrounds/${e.features[0].properties.id}">${e.features[0].properties.title}</a></h6>
-                 <p>${e.features[0].properties.description.substring(0, 40)}...</p>
+                 <p>${e.features[0].properties.description.substring(0, 80)}...</p>
                  ${imageHtml}`
             )
             .addTo(map);
