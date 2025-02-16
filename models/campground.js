@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Review = require('./review');
 const Schema = mongoose.Schema;
+const { cloudinary } = require('../cloudinary');
 
 const ImagesSchema = new Schema({
     url: String,
@@ -55,9 +56,24 @@ CampgroundSchema.virtual('reviewCount').get(function () {
     return this.reviews.length;
 });
 
+// ✅ 캠프그라운드 삭제 후 연결된 리뷰 & 이미지 삭제
 CampgroundSchema.post('findOneAndDelete', async function (doc) {
-    if (doc && doc.reviews.length) {
-        await Review.deleteMany({ _id: { $in: doc.reviews } });
+    if (doc) {
+        // 1. 연결된 리뷰 삭제
+        if (doc.reviews.length) {
+            await Review.deleteMany({ _id: { $in: doc.reviews } });
+        }
+
+        // 2. Cloudinary에서 이미지 삭제
+        if (doc.images.length) {
+            try {
+                await Promise.all(
+                    doc.images.map(image => cloudinary.uploader.destroy(image.filename))
+                );
+            } catch (err) {
+                console.error('Error deleting images from Cloudinary:', err);
+            }
+        }
     }
 });
 
