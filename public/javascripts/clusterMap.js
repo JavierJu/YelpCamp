@@ -166,11 +166,11 @@ map.on('load', () => {
             }
         }
 
-        new mapboxgl.Popup({ offset: 25, closeButton: true })
+        new mapboxgl.Popup({ offset: 25, closeOnClick: true, closeButton: true, keepInView: false, anchor: 'top' })
             .setLngLat(coordinates)
             .setHTML(
                 `<h6><a href="/campgrounds/${e.features[0].properties.id}">${e.features[0].properties.title}</a></h6>
-                 <p>${e.features[0].properties.description.substring(0, 80)}...</p>
+                 <p>${e.features[0].properties.description.substring(0, 40)}...</p>
                  ${imageHtml}`
             )
             .addTo(map);
