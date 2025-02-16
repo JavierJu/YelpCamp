@@ -136,7 +136,6 @@ module.exports.updateCampground = async (req, res) => {
 };
 
 module.exports.deleteCampground = async (req, res) => {
-    const campground = await Campground.findById(req.params.id);
     await Campground.findByIdAndDelete(req.params.id);
     res.redirect('/campgrounds');
-}
+};

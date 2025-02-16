@@ -56,10 +56,10 @@ CampgroundSchema.virtual('reviewCount').get(function () {
 });
 
 CampgroundSchema.post('findOneAndDelete', async function (doc) {
-    if (doc) {
-        await Review.deleteMany({ _id: { $in: doc.reviews } })
+    if (doc && doc.reviews.length) {
+        await Review.deleteMany({ _id: { $in: doc.reviews } });
     }
-})
+});
 
 CampgroundSchema.index({ title: "text", description: "text", location: "text" });
 
