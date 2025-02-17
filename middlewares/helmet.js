@@ -32,6 +32,7 @@ const setupHelmet = () => {
 
     return helmet.contentSecurityPolicy({
         directives: {
+            upgradeInsecureRequests: null,
             defaultSrc: [],
             connectSrc: ["'self'", ...connectSrcUrls],
             scriptSrc: ["'unsafe-inline'", "'self'", ...scriptSrcUrls],
