@@ -39,9 +39,10 @@
                 <div class="mb-3">
                     <label for="image" class="form-label">Add More Image Files: </label>
                     <input type="file" name="image" id="image" class="form-control" multiple>
-                    <div class="valid-feedback">
+                    <div id="imageFeedback" class="invalid-feedback" style="display: none;"></div>
+                    <!-- <div class="valid-feedback">
                         Looks good!
-                    </div>
+                    </div> -->
                 </div>
                 <div class="mb-3">
                     <% campground.images.forEach(function(img,i) {%>
