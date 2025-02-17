@@ -38,7 +38,26 @@ const storage = new CloudinaryStorage({
 //   res.json(req.file);
 // });
 
+// 파일 타입 및 확장자 검증을 위한 fileFilter
+const fileFilter = (req, file, cb) => {
+    // 허용할 파일 타입: JPEG, JPG, PNG
+    const allowedFileTypes = /jpeg|jpg|png/;
+    const extname = allowedFileTypes.test(file.originalname.toLowerCase());
+    const mimetype = allowedFileTypes.test(file.mimetype);
+    if (mimetype && extname) {
+        return cb(null, true);
+    } else {
+        cb(new Error('Invalid file type. Only JPEG, JPG, and PNG files are allowed!'));
+    }
+};
+// 파일 크기 제한 등 추가 옵션 설정
+const limits = {
+    fileSize: 5 * 1024 * 1024 // 5MB per file
+};
+
 module.exports = {
     cloudinary,
-    storage
+    storage,
+    fileFilter,
+    limits
 }
