@@ -19,7 +19,7 @@ router.route('/')
     .get(campgrounds.index)
     .post(
         isLoggedIn,
-        upload.array('image', 10), // 이미지 유효성 검사 방법 필요
+        upload.array('image', 10),
         validateCampground,
         campgrounds.createCampground
     );
@@ -35,7 +35,7 @@ router.route('/:id')
     .put(
         isLoggedIn,
         isAuthor,
-        upload.array('image', 5), // 이미지 유효성 검사 방법 필요(수량 제한, 용량 제한, 파일명 등등)
+        upload.array('image', 10),
         validateCampground,
         campgrounds.updateCampground
     )
