@@ -7,7 +7,7 @@ require('dotenv').config(); // 환경변수 로드
 const generateSitemap = async () => {
     try {
         // MongoDB 연결
-        await mongoose.connect(process.env.MONGO_URI, {
+        await mongoose.connect(process.env.DB_URL, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
         });
@@ -30,19 +30,26 @@ const generateSitemap = async () => {
             });
         });
 
-        // Sitemap 생성
+        // SitemapStream 생성
         const stream = new SitemapStream({ hostname: 'https://www.yelp-camp.com/' });
-        const sitemap = await streamToPromise(links.map(link => stream.write(link)))
-            .then(data => Buffer.concat([data, Buffer.from('</urlset>')]));
 
+        // 파일 저장을 위한 파이프라인 설정
+        const writeStream = fs.createWriteStream('./public/sitemap.xml');
+        stream.pipe(writeStream);
+
+        // 링크들을 스트림에 하나씩 추가
+        links.forEach(link => stream.write(link));
+
+        // 스트림 종료
         stream.end();
 
-        // 파일 저장
-        fs.writeFileSync('./public/sitemap.xml', sitemap);
-        console.log('✅ Sitemap generated: /public/sitemap.xml');
+        // 스트림이 종료될 때까지 기다림
+        await streamToPromise(stream);
+
+        console.log('✅ Sitemap successfully generated: /public/sitemap.xml');
 
         // MongoDB 연결 종료
-        mongoose.connection.close();
+        await mongoose.connection.close();
     } catch (error) {
         console.error('❌ Error generating sitemap:', error);
         mongoose.connection.close();
