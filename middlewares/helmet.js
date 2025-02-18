@@ -26,6 +26,8 @@ const setupHelmet = () => {
         "https://a.tiles.mapbox.com/",
         "https://b.tiles.mapbox.com/",
         "https://events.mapbox.com/",
+        "https://www.google-analytics.com/",
+        "https://analytics.google.com/",
     ];
     const fontSrcUrls = [
         "https://cdnjs.cloudflare.com",  // Font Awesome 폰트 허용
