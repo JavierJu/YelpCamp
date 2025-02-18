@@ -92,11 +92,11 @@ app.use((err, req, res, next) => {
 })
 
 // 서버 시작할 때 Sitemap 생성
-generateSitemap().then(() => {
-    console.log('✅ Sitemap generated successfully!');
-}).catch(err => {
-    console.error('❌ Failed to generate sitemap:', err);
-});
+// generateSitemap().then(() => {
+//     console.log('✅ Sitemap generated successfully!');
+// }).catch(err => {
+//     console.error('❌ Failed to generate sitemap:', err);
+// });
 
 // Sitemap 정적 제공
 app.use('/sitemap.xml', express.static(path.join(__dirname, 'public', 'sitemap.xml')));
