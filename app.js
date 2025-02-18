@@ -16,6 +16,7 @@ const sessionConfig = require('./middlewares/session');
 const setupHelmet = require('./middlewares/helmet');
 const ExpressError = require('./utils/ExpressError');
 const User = require('./models/user');
+const generateSitemap = require('./utils/sitemap');
 
 const methodOverride = require('method-override');
 const morgan = require('morgan');
@@ -89,6 +90,16 @@ app.use((err, req, res, next) => {
     if (!err.message) err.message = 'Oh No, Something Went Wrong!'
     res.status(status).render('error', { err });
 })
+
+// 서버 시작할 때 Sitemap 생성
+generateSitemap().then(() => {
+    console.log('✅ Sitemap generated successfully!');
+}).catch(err => {
+    console.error('❌ Failed to generate sitemap:', err);
+});
+
+// Sitemap 정적 제공
+app.use('/sitemap.xml', express.static(path.join(__dirname, 'public', 'sitemap.xml')));
 
 // Port
 const port = process.env.PORT || 3000;
