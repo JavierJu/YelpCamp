@@ -16,8 +16,8 @@ const setupHelmet = () => {
         "https://api.tiles.mapbox.com/",
         "https://fonts.googleapis.com/",
         "https://use.fontawesome.com/",
-        "https://cdn.jsdelivr.net", // 누락된 CDN 추가
-        "https://cdnjs.cloudflare.com/", // 누락된 CDN 추가
+        "https://cdn.jsdelivr.net",
+        "https://cdnjs.cloudflare.com/",
     ];
     const connectSrcUrls = [
         "https://api.mapbox.com/",
@@ -27,18 +27,17 @@ const setupHelmet = () => {
     ];
     const fontSrcUrls = [
         "https://cdnjs.cloudflare.com",  // Font Awesome 폰트 허용
-        "https://fonts.gstatic.com",    // Google Fonts 허용
+        "https://fonts.gstatic.com",     // Google Fonts 허용
     ];
 
     return helmet.contentSecurityPolicy({
         directives: {
-            upgradeInsecureRequests: null,
-            defaultSrc: [],
+            defaultSrc: ["'self'"], // 기본적으로 같은 도메인에서 제공되는 리소스 허용
             connectSrc: ["'self'", ...connectSrcUrls],
-            scriptSrc: ["'unsafe-inline'", "'self'", ...scriptSrcUrls],
+            scriptSrc: ["'self'", "'unsafe-inline'", ...scriptSrcUrls],
             styleSrc: ["'self'", "'unsafe-inline'", ...styleSrcUrls],
             workerSrc: ["'self'", "blob:"],
-            objectSrc: [],
+            objectSrc: ["'none'"], // 객체 태그 사용 금지 (보안 강화)
             imgSrc: [
                 "'self'",
                 "blob:",
@@ -46,7 +45,9 @@ const setupHelmet = () => {
                 "https://res.cloudinary.com/", // Replace with your Cloudinary
                 "https://images.unsplash.com/",
             ],
-            fontSrc: ["'self'", ...fontSrcUrls], // 폰트 출처 추가됨
+            fontSrc: ["'self'", ...fontSrcUrls],
+            manifestSrc: ["'self'"], // ✅ manifest.json 로딩 허용
+            upgradeInsecureRequests: [], // ✅ HTTPS 강제 업그레이드 (기본적으로 포함됨)
         },
     });
 };
