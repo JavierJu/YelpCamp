@@ -8,6 +8,8 @@ const setupHelmet = () => {
         "https://kit.fontawesome.com/",
         "https://cdnjs.cloudflare.com/",
         "https://cdn.jsdelivr.net",
+        "https://www.googletagmanager.com/",
+        "https://www.google-analytics.com/",
     ];
     const styleSrcUrls = [
         "https://kit-free.fontawesome.com/",
