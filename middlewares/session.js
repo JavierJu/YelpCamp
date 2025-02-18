@@ -17,10 +17,11 @@ const sessionConfig = (dbUrl, secret) => {
         name: 'session',
         secret,
         resave: false,
-        saveUninitialized: true,
+        saveUninitialized: false,
         cookie: {
             HttpOnly: true,
-            secure: process.env.NODE_ENV === 'production', // 배포 시 true, 개발 시 false
+            secure: process.env.NODE_ENV === 'production', // HTTPS 환경에서만 쿠키 전송
+            sameSite: 'Lax', // EJS 서버 렌더링에서는 'Lax'로 두는 게 일반적
             expires: Date.now() + 1000 * 60 * 60 * 24 * 7, // 1주일
             maxAge: 1000 * 60 * 60 * 24 * 7, // 1주일        
         },

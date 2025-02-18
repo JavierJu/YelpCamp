@@ -101,6 +101,9 @@ app.use((err, req, res, next) => {
 // Sitemap 정적 제공
 app.use('/sitemap.xml', express.static(path.join(__dirname, 'public', 'sitemap.xml')));
 
+// AWS, Nginx, 로드밸런서 환경에서 필요
+app.set('trust proxy', 1);
+
 // Port
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
