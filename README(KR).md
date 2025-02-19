@@ -50,7 +50,7 @@ npm start
 
 브라우저에서 `http://localhost:3000`에 접속하세요.
 
-> **자세한 설치 가이드 및 환경 변수 설정:** [설치 가이드](docs/Setup.md)
+> **자세한 설치 가이드 및 환경 변수 설정:** [설치 가이드](<docs/Setup(KR).md>)
 
 ---
 
@@ -59,7 +59,7 @@ npm start
 - **v1.3.0**: AWS 기반 배포, 자동 배포(PM2, CloudFront 캐시 무효화) 추가
 - **v1.2.0**: 지도 클러스터 개선, Cloudinary 파일 삭제 기능 추가
 - **v1.1.0**: 코드 리팩토링, 사용자 경험 개선
-  > **전체 변경 사항 보기:** [CHANGELOG.md](CHANGELOG.md)
+  > **전체 변경 사항 보기:** [CHANGELOG.md](<CHANGELOG(KR).md>)
 
 ---
 
