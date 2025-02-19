@@ -40,6 +40,7 @@ module.exports.renderLoginForm = (req, res) => {
 // }
 
 module.exports.login = async (req, res) => {
+    console.log("SESSION DATA AFTER LOGIN:", req.session); // 🚀 세션이 생성되는지 확인
     req.flash('success', 'welcome back');
 
     let redirectUrl = res.locals.returnTo || '/campgrounds';
