@@ -10,7 +10,6 @@ const LocalStrategy = require('passport-local');
 const mongoSanitize = require('express-mongo-sanitize');
 require('express-async-errors');
 const ejsMate = require('ejs-mate');
-// const cors = require('cors');
 
 const connectDB = require('./config/db');
 const sessionConfig = require('./middlewares/session');
@@ -53,14 +52,6 @@ const secret = process.env.SECRET || 'thisisnotagoodsecret';
 
 // Session
 app.use(sessionConfig(dbUrl, secret));
-
-// ✅ CORS 설정 (세션 설정 후에 와야 함)
-// app.use(cors({
-//     origin: 'https://www.javierju.com',
-//     credentials: true,
-//     allowedHeaders: ['Content-Type', 'Authorization'],
-//     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
-// }));
 
 //HelmsetupHt
 app.use(setupHelmet());
