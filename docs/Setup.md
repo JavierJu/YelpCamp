@@ -1,6 +1,6 @@
 # Setup Guide
 
-## 1. 프로젝트 클론 및 설치
+## 1. Clone the Project and Install Dependencies
 
 ```bash
 git clone https://github.com/username/yelp-camp.git
@@ -8,12 +8,12 @@ cd yelp-camp
 npm install
 ```
 
-## 2. 환경 변수 설정 (`.env` 파일 생성)
+## 2. Set Up Environment Variables (`.env` File)
 
-프로젝트 루트에 `.env` 파일을 생성하고 아래 내용을 추가하세요:
+Create a `.env` file in the project root and add the following content:
 
 ```env
-DB_URL=mongodb://localhost:27017/yelp-camp
+DB_URL=mongodb://localhost:27017/yelp-camp # Use this for local development (or replace with your MongoDB Atlas URL)
 SECRET=yourSecretKey
 CLOUDINARY_CLOUD_NAME=yourCloudName
 CLOUDINARY_API_KEY=yourApiKey
@@ -22,31 +22,31 @@ CLOUDINARY_URL=yourURL
 MAPBOX_TOKEN=yourMapboxToken
 ```
 
-## 3. 데이터베이스 실행 (MongoDB)
+## 3. Start the Database (MongoDB) (For local development, ensure MongoDB is running)
 
 ```bash
 mongod
 ```
 
-## 4. 애플리케이션 실행
+## 4. Run the Application
 
 ```bash
 npm start
 ```
 
-애플리케이션이 실행되면 브라우저에서 `http://localhost:3000`에 접속하세요.
+Once the application is running, open your browser and go to `http://localhost:3000`.
 
-## 5. AWS EC2 배포
+## 5. Deploying on AWS EC2
 
-### 5.1. 서버 환경 설정
+### 5.1. Set Up the Server Environment
 
-AWS EC2 인스턴스에 Node.js 및 MongoDB를 설치하세요:
+Install Node.js and MongoDB on your AWS EC2 instance:
 
 ```bash
 sudo apt update && sudo apt install -y nodejs npm mongodb
 ```
 
-### 5.2. 프로젝트 배포
+### 5.2. Deploy the Project
 
 ```bash
 git clone https://github.com/username/yelp-camp.git
@@ -54,7 +54,7 @@ cd yelp-camp
 npm install
 ```
 
-### 5.3. PM2로 애플리케이션 실행
+### 5.3. Run the Application with PM2
 
 ```bash
 npm install -g pm2
@@ -63,14 +63,14 @@ pm2 save
 pm2 startup
 ```
 
-### 5.4. Nginx 설정 (Reverse Proxy)
+### 5.4. Configure Nginx as a Reverse Proxy
 
 ```bash
 sudo apt install nginx
 sudo nano /etc/nginx/sites-available/yelp-camp
 ```
 
-아래 설정 추가 후 저장:
+Add the following configuration and save the file:
 
 ```nginx
 server {
@@ -88,16 +88,16 @@ server {
 }
 ```
 
-적용 후 Nginx 재시작:
+Apply the configuration and restart Nginx:
 
 ```bash
 sudo ln -s /etc/nginx/sites-available/yelp-camp /etc/nginx/sites-enabled/
 sudo systemctl restart nginx
 ```
 
-## 6. 자동 배포 설정 (GitHub Actions)
+## 6. Set Up Automatic Deployment (GitHub Actions)
 
-`.github/workflows/deploy.yml` 파일 생성 후 아래 내용 추가:
+Create the `.github/workflows/deploy.yml` file and add the following content:
 
 ```yaml
 name: Deploy to AWS
@@ -128,4 +128,4 @@ jobs:
             sudo systemctl restart nginx
 ```
 
-이제 GitHub에 `main` 브랜치에 push하면 자동으로 배포됩니다.
+Now, every time you push changes to the `main` branch, GitHub Actions will automatically deploy the project.

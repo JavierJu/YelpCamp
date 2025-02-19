@@ -2,40 +2,40 @@
 
 ## v1.3.0 - (2025-02-19)
 
-### 주요 변경 사항
+### Major Updates
 
-- **AWS 기반 배포**: AWS EC2 + Nginx로 서버 재배포
-- **네트워크 최적화**: AWS Route 53, ACL, ELB, CloudFront 적용
-- **자동화된 배포**: GitHub Actions 기반 CI/CD 적용 (EC2 자동 배포, PM2 재시작, CloudFront 캐시 무효화)
-- **Sitemap 생성 및 SEO 최적화**: Google Search Console 및 Google Analytics 연동
+- **AWS-Based Deployment**: Server redeployed using AWS EC2 + Nginx
+- **Network Optimization**: Integrated AWS Route 53, ACL, ELB, and CloudFront
+- **Automated Deployment**: CI/CD pipeline using GitHub Actions (Auto-deploy to EC2, PM2 restart, CloudFront cache invalidation)
+- **Sitemap Generation & SEO Enhancement**: Integrated with Google Search Console and Google Analytics
 
 ## v1.2.0 - (2025-02-17)
 
-### 주요 변경 사항
+### Major Updates
 
-- **지도 기능 개선**: 클러스터 지도 팝업에 캠프장 정보(이름, 설명, 이미지) 추가
-- **Cloudinary 파일 관리 개선**: 캠프장 삭제 시 연관된 이미지 자동 삭제
-- **이미지 업로드 유효성 검사 강화**: 파일 타입, 개수, 용량 제한 추가
+- **Improved Map Functionality**: Cluster map popups now display campground details (name, description, image)
+- **Enhanced Cloudinary File Management**: Automatically delete associated images when a campground is removed
+- **Stronger Image Upload Validation**: Enforced file type, count, and size restrictions
 
 ## v1.1.0 - (2025-02-04)
 
-### 주요 변경 사항
+### Major Updates
 
-- **코드 리팩토링**: `app.js` 모듈화 및 `middlewares`, `routes`, `controllers` 구조 개선
-- **사용자 경험 개선**: 회원가입 후 자동 로그인 및 리디렉션 최적화
-- **UI 개선**: 홈 페이지 디자인 업데이트, 불필요한 버튼 제거
-- **새로운 기능 추가**:
-  - 기본 이미지 설정 (이미지가 없을 경우 기본 이미지 제공)
-  - 검색 기능 추가 (MongoDB `$text` 인덱스 활용)
-  - 작성 및 수정 날짜 표시 기능 추가
-  - 리뷰 시스템 개선 (리뷰 수 및 평균 평점 표시, 정렬 개선)
+- **Code Refactoring**: Modularized `app.js` and improved `middlewares`, `routes`, and `controllers` structure
+- **User Experience Enhancements**: Improved sign-up flow with auto-login and refined redirection
+- **UI Improvements**: Updated homepage design, removed unnecessary buttons
+- **New Features**:
+  - Default images for campgrounds with missing pictures
+  - Search functionality using MongoDB `$text` index
+  - Display timestamps for created and updated campgrounds and reviews
+  - Improved review system (total reviews, average ratings, and sorting enhancements)
 
 ## v1.0.0 - (2025-01-12)
 
-### 초기 릴리즈
+### Initial Release
 
-- 기본적인 캠프장 CRUD 기능
-- 사용자 인증 및 권한 시스템 (회원가입, 로그인, 로그아웃)
-- 리뷰 시스템 및 별점 평가 기능
-- 지도 연동 (Mapbox 활용)
-- Cloudinary를 이용한 이미지 업로드 지원
+- Basic campground CRUD functionality
+- User authentication and authorization system (Sign-up, Login, Logout)
+- Review system with star rating
+- Map integration using Mapbox
+- Image upload support via Cloudinary
