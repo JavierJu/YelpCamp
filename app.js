@@ -34,12 +34,6 @@ connectDB();
 // AWS, Nginx, 로드밸런서 환경에서 필요
 app.set('trust proxy', 1);
 
-// CORS 설정
-// app.use(cors({
-//     origin: 'https://www.javierju.com', // EC2의 실제 배포된 URL
-//     credentials: true
-// }));
-
 // EJS
 app.engine('ejs', ejsMate);
 app.set('view engine', 'ejs');
@@ -59,6 +53,14 @@ const secret = process.env.SECRET || 'thisisnotagoodsecret';
 
 // Session
 app.use(sessionConfig(dbUrl, secret));
+
+// ✅ CORS 설정 (세션 설정 후에 와야 함)
+app.use(cors({
+    origin: 'https://www.javierju.com',
+    credentials: true,
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
+}));
 
 //HelmsetupHt
 app.use(setupHelmet());
