@@ -10,6 +10,7 @@ const LocalStrategy = require('passport-local');
 const mongoSanitize = require('express-mongo-sanitize');
 require('express-async-errors');
 const ejsMate = require('ejs-mate');
+const cors = require('cors');
 
 const connectDB = require('./config/db');
 const sessionConfig = require('./middlewares/session');
@@ -59,6 +60,11 @@ app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
+
+app.use(cors({
+    origin: 'https://www.javierju.com', // EC2의 실제 배포된 URL
+    credentials: true
+}));
 
 // Locals
 app.use((req, res, next) => {
