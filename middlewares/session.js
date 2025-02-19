@@ -18,6 +18,7 @@ const sessionConfig = (dbUrl, secret) => {
         secret,
         resave: false,
         saveUninitialized: false,
+        proxy: true,
         cookie: {
             HttpOnly: true,
             secure: process.env.NODE_ENV === 'production', // HTTPS 환경에서만 쿠키 전송
