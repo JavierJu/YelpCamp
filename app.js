@@ -35,10 +35,10 @@ connectDB();
 app.set('trust proxy', 1);
 
 // CORS 설정
-app.use(cors({
-    origin: 'https://www.javierju.com', // EC2의 실제 배포된 URL
-    credentials: true
-}));
+// app.use(cors({
+//     origin: 'https://www.javierju.com', // EC2의 실제 배포된 URL
+//     credentials: true
+// }));
 
 // EJS
 app.engine('ejs', ejsMate);
