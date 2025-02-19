@@ -34,6 +34,12 @@ connectDB();
 // AWS, Nginx, 로드밸런서 환경에서 필요
 app.set('trust proxy', 1);
 
+// CORS 설정
+app.use(cors({
+    origin: 'https://www.javierju.com', // EC2의 실제 배포된 URL
+    credentials: true
+}));
+
 // EJS
 app.engine('ejs', ejsMate);
 app.set('view engine', 'ejs');
@@ -63,11 +69,6 @@ app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
-
-app.use(cors({
-    origin: 'https://www.javierju.com', // EC2의 실제 배포된 URL
-    credentials: true
-}));
 
 // Locals
 app.use((req, res, next) => {
