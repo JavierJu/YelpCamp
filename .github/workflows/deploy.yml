@@ -22,7 +22,7 @@ jobs:
         run: |
           ssh -o StrictHostKeyChecking=no -i private_key.pem ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
             echo "🔄 Deploy 시작..."
-            cd /var/www/yelpcamp
+            cd /var/www/YelpCamp
             
             echo "📥 Git Pull..."
             git pull origin main
