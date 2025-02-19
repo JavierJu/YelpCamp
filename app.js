@@ -113,6 +113,12 @@ app.use((err, req, res, next) => {
 // Sitemap 정적 제공
 app.use('/sitemap.xml', express.static(path.join(__dirname, 'public', 'sitemap.xml')));
 
+app.use((req, res, next) => {
+    console.log("Trust Proxy Setting:", req.app.get("trust proxy")); // 🚀 프록시 설정 확인
+    console.log("Session Data:", req.session); // 🚀 세션 데이터 확인
+    next();
+});
+
 // Port
 const port = process.env.PORT || 3000;
 app.listen(port, () => {

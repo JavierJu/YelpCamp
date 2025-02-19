@@ -51,6 +51,7 @@ module.exports.login = async (req, res) => {
     }
 
     req.session.save(() => {  // ✅ 세션을 저장한 후 리다이렉트 실행
+        console.log("SESSION SAVED, REDIRECTING TO:", redirectUrl); // 🚀 세션 저장 여부 확인
         res.redirect(redirectUrl);
     });
 };
