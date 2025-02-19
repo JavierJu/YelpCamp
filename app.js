@@ -10,7 +10,7 @@ const LocalStrategy = require('passport-local');
 const mongoSanitize = require('express-mongo-sanitize');
 require('express-async-errors');
 const ejsMate = require('ejs-mate');
-const cors = require('cors');
+// const cors = require('cors');
 
 const connectDB = require('./config/db');
 const sessionConfig = require('./middlewares/session');
@@ -55,12 +55,12 @@ const secret = process.env.SECRET || 'thisisnotagoodsecret';
 app.use(sessionConfig(dbUrl, secret));
 
 // ✅ CORS 설정 (세션 설정 후에 와야 함)
-app.use(cors({
-    origin: 'https://www.javierju.com',
-    credentials: true,
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
-}));
+// app.use(cors({
+//     origin: 'https://www.javierju.com',
+//     credentials: true,
+//     allowedHeaders: ['Content-Type', 'Authorization'],
+//     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
+// }));
 
 //HelmsetupHt
 app.use(setupHelmet());
@@ -112,12 +112,6 @@ app.use((err, req, res, next) => {
 
 // Sitemap 정적 제공
 app.use('/sitemap.xml', express.static(path.join(__dirname, 'public', 'sitemap.xml')));
-
-app.use((req, res, next) => {
-    console.log("Trust Proxy Setting:", req.app.get("trust proxy")); // 🚀 프록시 설정 확인
-    console.log("Session Data:", req.session); // 🚀 세션 데이터 확인
-    next();
-});
 
 // Port
 const port = process.env.PORT || 3000;
