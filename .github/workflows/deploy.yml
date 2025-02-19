@@ -25,10 +25,24 @@ jobs:
             cd /var/www/YelpCamp
             
             echo "📥 Git Pull..."
-            git pull origin main
-            
-            echo "📦 NPM Install..."
-            npm ci  # 더 빠른 패키지 설치
+            git fetch origin main
+            CHANGED_FILES=$(git diff --name-only HEAD..origin/main)
+
+            if [[ ! -z "$CHANGED_FILES" ]]; then
+              git reset --hard
+              git pull origin main
+            else
+              echo "✅ 코드 변경 없음, 종료"
+              exit 0
+            fi
+
+            echo "🔍 패키지 변경 사항 확인..."
+            if echo "$CHANGED_FILES" | grep -qE 'package(-lock)?\.json'; then
+              echo "📦 패키지 변경 감지됨! npm install 실행"
+              npm ci
+            else
+              echo "✅ 패키지 변경 없음, npm install 생략"
+            fi
             
             echo "🚀 PM2 재시작..."
             pm2 restart yelpcamp --update-env
