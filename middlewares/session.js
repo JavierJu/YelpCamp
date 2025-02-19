@@ -21,7 +21,7 @@ const sessionConfig = (dbUrl, secret) => {
         proxy: true,
         cookie: {
             HttpOnly: true,
-            secure: process.env.NODE_ENV === 'production', // HTTPS 환경에서만 쿠키 전송
+            secure: process.env.NODE_ENV === 'production' ? 'auto' : false, // ✅ auto로 변경
             sameSite: 'Lax', // EJS 서버 렌더링에서는 'Lax'로 두는 게 일반적
             expires: Date.now() + 1000 * 60 * 60 * 24 * 7, // 1주일
             maxAge: 1000 * 60 * 60 * 24 * 7, // 1주일        
