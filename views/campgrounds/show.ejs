@@ -1,8 +1,8 @@
 <% layout('./layouts/boilerplate') %>
 
-    <div class="row flex-column flex-md-row">
+    <div class="row flex-column flex-md-row shadow p-3 mb-5 bg-body rounded">
         <!-- Left Section: Campground Info -->
-        <div class="col-md-6">
+        <div class="col-md-6 shadow p-3 mb-5 bg-body rounded">
             <div class="card mb-3">
                 <div id="campgroundCarousel" class="carousel slide">
                     <div class="carousel-inner">
@@ -77,16 +77,16 @@
         </div>
 
         <!-- Right Section: Reviews -->
-        <div class="col-md-6">
+        <div class="col-md-6 shadow p-3 mb-5 bg-body rounded">
             <div id="review-section">
                 <!-- 리뷰 작성 섹션 -->
                 <% if (currentUser) { %>
-                    <div class="card mb-3">
+                    <div class="card mb-3 shadow-sm">
                         <div class="card-body">
                             <h2 class="card-title">Leave a Review</h2>
-                            <form action="/campgrounds/<%= campground._id %>/reviews" class="mb-3 form-validation"
+                            <form action="/campgrounds/<%= campground._id %>/reviews" class="form-validation"
                                 method="post" novalidate>
-                                <fieldset class="starability-grow mb-3">
+                                <fieldset class="starability-grow">
                                     <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]"
                                         value="0" checked aria-label="No rating." />
                                     <input type="radio" id="first-rate1" name="review[rating]" value="1" />
@@ -109,32 +109,35 @@
                         </div>
                     </div>
                     <% } else { %>
-                        <div class="card mb-3">
-                            <div class="card-body">
-                                <h2 class="card-title">Please Log In</h2>
-                                <p>You need to be logged in to leave a review.</p>
-                            </div>
+                        <div class="card mb-3 shadow-sm">
+                            <!-- <div class="card-body"> -->
+                            <a href="/login" class="btn btn-info">Login add a review</a>
+                            <!-- <p>You need to be logged in to leave a review.</p> -->
+                            <!-- </div> -->
                         </div>
                         <% } %>
                             <!-- 전체 리뷰 개수와 평균 평점 -->
-                            <div class="card mb-3">
+                            <div class="card mb-3 shadow-sm">
+                                <div class="card-header">
+                                    <h5 class="card-title">User Reviews</h5>
+                                </div>
                                 <div class="card-body">
-                                    <h2 class="card-title">User Reviews</h2>
+                                    <!-- <h2 class="card-title">User Reviews</h2> -->
                                     <p class="starability-result" data-rating="<%= campground.averageRating %>">
                                         Rated: <%= campground.averageRating %>
                                     </p>
-                                    <p class="card-title">
+                                    <h5 class="card-title">
                                         Average Rating: <%= campground.averageRating %>
-                                    </p>
-                                    <p>
-                                        <%= campground.reviewCount %> Reviews
-                                    </p>
+                                    </h5>
+                                    <h5 class="card-title">
+                                        Total <%= campground.reviewCount %> Reviews
+                                    </h5>
                                 </div>
                             </div>
 
                             <!-- 기존 리뷰 목록 -->
                             <% for (let review of campground.reviews) { %>
-                                <div class="card mb-3">
+                                <div class="card mb-3 shadow-sm">
                                     <div class="card-body">
                                         <h5 class="card-title">
                                             <i class="fas fa-user-circle text-secondary me-2"></i>
