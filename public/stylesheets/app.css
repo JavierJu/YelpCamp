@@ -57,3 +57,24 @@
 .mapboxgl-popup-tip {
     border-top-color: rgba(255, 255, 255, 0.95) !important;
 }
+
+#demo-banner {
+    background-color: #f0ad4e; /* 눈에 띄는 주황색 계열 */
+    color: #fff;
+    padding: 10px 50px;
+    text-align: center;
+    position: relative;
+    font-size: 16px;
+  }
+  
+  #demo-banner button {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+  }
+  
