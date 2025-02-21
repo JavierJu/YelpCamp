@@ -27,8 +27,8 @@ const map = new mapboxgl.Map({
     container: 'cluster-map',
     // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
     style: 'mapbox://styles/mapbox/light-v11',
-    center: [-103.5917, 40.6699],
-    zoom: 3
+    center: [138.2529, 36.2048], // starting position [lng, lat]
+    zoom: 2
 });
 
 map.addControl(new mapboxgl.NavigationControl());
