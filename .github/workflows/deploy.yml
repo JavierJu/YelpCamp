@@ -44,8 +44,16 @@ jobs:
               echo "✅ 패키지 변경 없음, npm install 생략"
             fi
             
-            echo "🚀 PM2 재시작..."
-            pm2 restart yelpcamp --update-env
+            echo "🚀 배포 후 PM2 실행 중..."
+            if pm2 list | grep -q "yelpcamp"; then
+              echo "✅ 기존 PM2 프로세스 감지됨. 환경 변수 업데이트 후 재시작..."
+              pm2 restart yelpcamp --update-env
+            else
+              echo "🚀 PM2 프로세스 없음. 새로 시작..."
+              pm2 start app.js --name yelpcamp --env production --update-env
+            fi
+
+            pm2 save
             
             echo "✅ Deploy 완료!"
           EOF
